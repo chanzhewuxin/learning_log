@@ -1,6 +1,26 @@
-<p>
-    <a href="{% url 'learning_logs:index' %}">Learning Log</a> - 
-    <a href="{% url 'learning_logs:topics' %}">Topics</a>
-</p>
+{%load bootstrap3%}
 
-{% block content %}{%endblock content%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <title>Learning Log</title>
+        {%bootsrap_css%}
+        {%bootstrap_javascript%}
+    </head>
+    <body>
+        <!-- Static navbor -->
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                 <div class="navbar-header">
+                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                     aria-expanded="false" aria-controls="navbar"></button>
+                     <a class="navbar-brand" href="{%url 'learning_logs:index'%}">Learning Log</a>
+                 </div>
+            </div>
+        </nav>
+    </body>
+</html>

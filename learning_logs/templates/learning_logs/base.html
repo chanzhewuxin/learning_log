@@ -1,26 +1,67 @@
-{%load bootstrap3%}
+{# Load the tag library #}
+{% load bootstrap4 %}
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
 
-        <title>Learning Log</title>
-        {%bootsrap_css%}
-        {%bootstrap_javascript%}
-    </head>
-    <body>
-        <!-- Static navbor -->
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                 <div class="navbar-header">
-                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                     aria-expanded="false" aria-controls="navbar"></button>
-                     <a class="navbar-brand" href="{%url 'learning_logs:index'%}">Learning Log</a>
-                 </div>
-            </div>
-        </nav>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Learning Log</title>
+
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+</head>
+
+<body>
+    <!-- Static navbor -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="{%url 'learning_logs:index'%}">Learning Log</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{%url 'learning_logs:topics'%}">Topics</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li> -->
+            </ul>
+            <ul class="navbar-nav justify-content-end">
+                {%if user.is_authenticated%}
+                <li class="nav-item"><a class="nav-link">Hello,{{user.username}}.</a></li>
+                <li class="nav-item"><a class="nav-link" href="{%url 'users:logout' %}">log out</a></li>
+                {%else%}
+                <li class="nav-item"><a class="nav-link" href="{%url 'users:register'%}">register</a></li>
+                <li class="nav-item"><a class="nav-link" href="{%url 'users:login'%}">log in</a></li>
+                {%endif%}
+            </ul>
+            <!-- <form class="form-inline mt-2 mt-md-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form> -->
+        </div>
+    </nav>
+
+    <div role="main" class="container">
+        <div class="page-header">
+            {%block header%}{%endblock header%}
+            <hr class="mb-4">
+        </div>
+        <div>{%block content%}{%endblock content%}</div>
+    </div> <!-- /container -->
+</body>
+
 </html>
